@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Index</title>
+        <script src="./control.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    </head>
+    <body>
+        <div id="navbar">
+            <a href="./index.html"><img id="nav-img" src="./s&w.png" alt="S&W"></a>
+            <div id="nav-item">
+                <ul>
+                    <li><a>PAGE 1</a></li>
+                    <li><a>PAGE 2</a></li>
+                    <li><a>PAGE 3</a></li>
+                </ul>
+            </div>
+            <div id="toggle-btn">MENU</div>
+        </div>
+        <div id="p-1" class="page">
+            <div class="p-title">Page 1</div>
+            <div class="p-content"></div>
+        </div>
+        <div id="p-2" class="page">
+            <div class="p-title">Page 2</div>
+            <div class="p-content"></div>
+        </div>
+        <div id="p-3" class="page">
+            <div class="p-title">Page 3</div>
+            <div class="p-content">
+                <a href="https://willy14620.github.io/" target="_blank">My blog</a>
+            </div>
+        </div>
+        <div id="go-top">^</div>
+        <!-- JQuery -->
+        <script>
+            $(document).ready(function(){
+                var num = $("li").length;
+                for(let i=0;i<=num;i++){
+                    $("li").eq(i).click(function(){
+                        $("html,body").stop();
+                        $("html,body").animate({"scrollTop":$("#p-"+(i+1)).offset().top}, 1000);
+                    });
+                }
+
+                $(window).scroll(function(){
+                    if($(this).scrollTop()>200){
+                        $("#go-top").fadeIn();
+                    }else{
+                        $("#go-top").stop().fadeOut();
+                    }
+                });
+
+                $("#go-top").click(function(){
+                    $("html,body").stop();
+                    $("html,body").animate({"scrollTop":0}, 1000);
+                });
+            });
+        </script>
+    </body>
+</html>
