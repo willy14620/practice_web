@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- JQuery -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js'></script>
+        <script src="./jquery.color.js"></script>
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+        <!-- Custom CSS -->
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Gaegu', cursive;
+                /* text-align: center; */
+            }
+
+            .form {
+                width: 200px;
+                height: 100px;
+                font-size: 20px;
+                border-radius: 2mm;
+                background-color: #323232;
+                color: #5ec0cf;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                padding-top: 10px;
+                margin: -50px 0 0 -100px;
+                text-shadow: 0 0 10px #5ec0cf;
+                text-align: center;
+            }
+
+            .form > * {
+                margin: 5px 0;
+            }
+
+            .form-title {
+                cursor: default;
+            }
+
+            .form-input {
+                border: 0;
+                border-radius: 1mm;
+                padding: 5px;
+                font-size: 15px;
+                font-family: 'Gaegu', cursive;
+            }
+
+            .form-input:focus {
+                outline-color: #5ec0cf;
+            }
+
+            .form-input::placeholder, .form-input:focus::placeholder {
+                color: #5ec0cf;
+            }
+
+            .form-btn {
+                cursor: pointer;
+                font-size: 15px;
+                font-family: 'Gaegu', cursive;
+                outline: none;
+                border: 1px solid #5ec0cf;
+                border-radius: 1mm;
+                background-color: #fff;
+                color: #5ec0cf;
+                transition: .5s;
+            }
+
+            .form-btn:hover {
+                box-shadow: 0 0 10px #5ec0cf;
+            }
+
+            .form-btn:active{
+                background-color:#000;
+                /* background: inherit; */
+            }
+        </style>
+        <title>Random Color</title>
+    </head>
+    <body>
+        <!-- Form -->
+        <form class="form">
+            <span class="form-title">Color code:</span>
+            <input id="input-color" class="form-input" type="text" placeholder="#000000, black">
+            <input id="random-color" class="form-btn" type="button" value="Random">
+            <input id="reset-color" class="form-btn" type="button" value="Reset">
+        </form>
+        <!-- JQuery -->
+        <script>
+            $(document).ready(function(){
+                
+                $("#input-color").keyup(function(){
+                    // $("body").css("background-color", $(this).val());
+                    $("body").animate({"background-color":$(this).val()}, 250);
+                })
+
+                $("#random-color").click(function(){
+                    var color = randomColor();
+                    $("#input-color").val(color);
+                    $("body").animate({"background-color":color}, 250);
+                });
+                
+                $("#reset-color").click(function(){
+                    $("#input-color").val("")
+                    $("body").animate({"background-color":""}, 250);
+                });
+
+                function randomColor(){
+                    var r = Math.floor(Math.random()*256).toString(16);
+                    var g = Math.floor(Math.random()*256).toString(16);
+                    var b = Math.floor(Math.random()*256).toString(16);
+                    return "#"+createZero(r)+createZero(g)+createZero(b);
+                }
+                function createZero(n){
+                    return n.length<2 ? "0"+n : n;
+                }
+            });
+        </script>
+    </body>
+</html>
